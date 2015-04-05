@@ -31,14 +31,13 @@ def main():
 
 def introduce():
     'Intro of this agent'
-    print("My name is " + agentName() + ", and I am a mage.")
+    print("My name is " + agentName() + ", and I am a taxi driver.")
     print("I was programmed by Ziming Guo. If you don't like")
     print("the way I deal, contact him at zimig3@uw.edu.")
-    print("How may I help you?")
+    print("So what is your problem?")
 
 def agentName():
-    return "Jaina Proudmoore"
-
+    return "David Angry"
 
 def respond(the_input):
     wordlist = split(' ',remove_punctuation(the_input))
@@ -47,29 +46,35 @@ def respond(the_input):
     mapped_wordlist = you_me_map(wordlist)
     mapped_wordlist[0]=mapped_wordlist[0].capitalize()
     if wordlist[0]=='':
-        return  "Please say something."     
+        return  "Don't waste my time, tell me what you want to say!"
+    if wordlist[0] == 'hello' or wordlist[0] == 'hi':
+        return 'Greetings.'
+    if wordlist[0:3] == ["how", 'are', 'you']:
+        return 'I got so much things to do, but I am forced' + \
+               ' to talk with you, guess how do I feel?'    
     if wordlist[0:2] == ['i','am']:
-        return  "Please tell me why you are " +\
-              stringify(mapped_wordlist[2:]) + '.'
+        return  "I am not interested in why you are " +\
+              stringify(mapped_wordlist[2:]) + ' at all.'
     if wpred(wordlist[0]):
-        return  "You tell me " + wordlist[0] + "."
+        return  "I am just a taxi driver, how could I possibly know "\
+                + wordlist[0] + "."
     if wordlist[0:2] == ['i','have']:
         return  "How long have you had " +\
               stringify(mapped_wordlist[2:]) + '.'
     if wordlist[0:2] == ['i','feel']:
-        return  "I sometimes feel the same way."
+        return  "I don't really care how you feel."
     if 'because' in wordlist:
         return  "Is that really the reason?"
     if 'yes' in wordlist:
         return  "How can you be so sure?"
     if wordlist[0:2] == ['you','are']:
-        return  "Oh yeah, I am " +\
+        return  "You just know me, it's  " +\
               stringify(mapped_wordlist[2:]) + '.'
     if verbp(wordlist[0]):
-        return  "Why do you want me to " +\
-              stringify(mapped_wordlist) + '?'
+        return  "I am not your servant, why do I need to " +\
+              stringify(mapped_wordlist) + 'as you commanded?'
     if wordlist[0:3] == ['do','you','think']:
-        return  "I think you should answer that yourself."
+        return  "I don't know, I am not your professor."
     if wordlist[0:2]==['can','you'] or wordlist[0:2]==['could','you']:
         return  "Perhaps I " + wordlist[0] + ' ' +\
              stringify(mapped_wordlist[2:]) + '.'
