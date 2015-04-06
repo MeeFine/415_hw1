@@ -17,27 +17,22 @@ def main():
     while True:
         the_input = input('TYPE HERE:>> ')
         if match('bye',the_input):
-            rand = random.randrange(4)
-            if (rand == 0):
-                print('Goodbye!')
-            elif (rand == 1):
-                print('May magic protect you.')
-            elif (rand == 2):
-                print('Never temper your passion.')
-            else:
-                print('Remember Theramore.')
+            print('Goodbye! It\'s been a joy meeting you.')
             return
         respond(the_input, wordlist, mapped_wordlist)
 
 def introduce():
     'Intro of this agent'
-    print("My name is " + agentName() + ", and I am a taxi driver.")
+    print("My name is " + agentName() + ", and I am a salesman.")
     print("I was programmed by Ziming Guo. If you don't like")
     print("the way I deal, contact him at zimig3@uw.edu.")
-    print("So what is your problem?")
+    print("So how can I help you?")
 
 def agentName():
-    return "David Angry"
+    return "David"
+
+user = []
+fword_count = 0;
 
 def respond(the_input):
     wordlist = split(' ',remove_punctuation(the_input))
@@ -46,48 +41,62 @@ def respond(the_input):
     mapped_wordlist = you_me_map(wordlist)
     mapped_wordlist[0]=mapped_wordlist[0].capitalize()
     if wordlist[0]=='':
-        return  "Don't waste my time, tell me what you want to say!"
+        return  "Time is money, my friend. Say something, don't let me guess."
+    if 'fuck' in wordlist or 'fucking' in wordlist:
+        fword_count++
+        if fword_count % 3 == 0:
+            return 'Show some respect please.'
+        elif fword_count % 3 == 1:
+            return 'I don\'t like to hear the f word.'
+        else:
+            return 'This is not funny.'
     if wordlist[0] == 'hello' or wordlist[0] == 'hi':
         return 'Greetings.'
     if wordlist[0:3] == ["how", 'are', 'you']:
-        return 'I got so much things to do, but I am forced' + \
-               ' to talk with you, guess how do I feel?'    
+        rand = random.randrange(3)
+        if rand == 0:
+            return 'I got so many business to do and so much money to make. I am busy and pleased.'
+        elif rand == 1:
+            return 'Today\'s good deals make me feeling very good'
+        else:
+            return 'I am sure I am having a good day.'
     if wordlist[0:2] == ['i','am']:
-        return  "I am not interested in why you are " +\
-              stringify(mapped_wordlist[2:]) + ' at all.'
+        user.append(stringify(mapped_wordlist[2:]))
+        return  "I am glad to hear more about you. Could you tell me why you are" +\
+              stringify(mapped_wordlist[2:])
     if wpred(wordlist[0]):
-        return  "I am just a taxi driver, how could I possibly know "\
+        return  "My knowledge is limited, I'd prefer to hear your opinion about "\
                 + wordlist[0] + "."
     if wordlist[0:2] == ['i','have']:
         return  "How long have you had " +\
               stringify(mapped_wordlist[2:]) + '.'
     if wordlist[0:2] == ['i','feel']:
-        return  "I don't really care how you feel."
+        return  'I had the same feeling sometimes.'
     if 'because' in wordlist:
         return  "Is that really the reason?"
     if 'yes' in wordlist:
         return  "How can you be so sure?"
     if wordlist[0:2] == ['you','are']:
-        return  "You just know me, it's  " +\
-              stringify(mapped_wordlist[2:]) + '.'
+        return  "I like to know how you think about me. " +\
+              "Tell me why I am " + stringify(mapped_wordlist[2:]) + '.'
     if verbp(wordlist[0]):
         return  "I am not your servant, why do I need to " +\
               stringify(mapped_wordlist) + 'as you commanded?'
     if wordlist[0:3] == ['do','you','think']:
-        return  "I don't know, I am not your professor."
+        return  "My opinion is minor, trust your own."
     if wordlist[0:2]==['can','you'] or wordlist[0:2]==['could','you']:
-        return  "Perhaps I " + wordlist[0] + ' ' +\
+        return  "I would like to " +\
              stringify(mapped_wordlist[2:]) + '.'
     if 'dream' in wordlist:
-        return  "For dream analysis see Freud."
+        return  "I seldom dream."
     if 'love' in wordlist:
-        return  "All's fair in love and war."
+        return  "Love, how beautiful it is."
     if 'no' in wordlist:
-        return  "Don't be so negative."
+        return  "People sometimes make mistakes."
     if 'maybe' in wordlist:
         return  "Be more decisive."
     if 'you' in mapped_wordlist or 'You' in mapped_wordlist:
-        answer = stringify(mapped_wordlist) + '.'
+        return stringify(mapped_wordlist) + '.'
     return punt()
 
 def stringify(wordlist):
@@ -113,7 +122,7 @@ PUNTS = ['Please go on.',
          'I see.',
          'What does that indicate?',
          'But why be concerned about it?',
-         'Just tell me how you feel.']
+         'I am listening.']
 
 punt_count = 0
 def punt():
