@@ -1,12 +1,7 @@
 # ziming3.py
-# A conversational "doctor" simulation modelled loosely
-# after J. Weizenbaum's ELIZA.
-# This Python program goes with the book "The Elements of Artificial
-# Intelligence".
-# This version of the program runs under Python 3.x.
-
-# Steven Tanimoto
-# (C) 2012.
+# CSE 415 Sp15 Steve Tanimoto
+# 4/7/2015
+# An simple AI that will do simple chat with users.
 
 from re import *   # Loads the regular expression module.
 import random
@@ -30,10 +25,11 @@ def introduce():
     return str
 
 def agentName():
+    'Return the name of this agent.'
     return "David"
 
-user = []
-fword_count = 0;
+user = []  # Record user's personality in some circumstances.
+fword_count = 0;  # Record the times that user use f-word and cycle response.
 
 def respond(the_input):
     wordlist = split(' ',remove_punctuation(the_input))
@@ -149,7 +145,9 @@ PUNTS = ['Please go on.',
          'I see.',
          'What does that indicate?',
          'But why be concerned about it?',
-         'I am listening.']
+         'I am listening.']  
+        # When the input doesn't fit any rules,
+        # then respond with one of those.
 
 punt_count = 0
 def punt():

@@ -8,10 +8,13 @@ def mystery_code(str, num):
     return ans
 
 def quadruples(seq):
-    subl = len(seq) / 4
+    subl = len(seq) // 4
     subs = []
     for i in range(subl):
-    	subs.append(seq[i:i+4])
+    	subs.append(seq[(4*i):(4*i)+4])
+    if len(seq) % 4 != 0:
+        i = i + 1
+        subs.append(seq[4*i:4*i+len(seq)%4])
     return subs
 
 def past_tense(list):
